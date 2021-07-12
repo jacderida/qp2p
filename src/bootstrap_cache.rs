@@ -24,6 +24,7 @@ use std::{
     io::{BufReader, BufWriter},
 };
 use tracing::warn;
+use whoami::username;
 
 /// Maximum peers in the cache.
 const MAX_CACHE_SIZE: usize = 200;
@@ -65,6 +66,8 @@ impl BootstrapCache {
                     cache_path.display().to_string()
                 ))
             })?;
+            println!("cache_dir = {:?}", cache_dir.to_str());
+            println!("current user = {:?}", username());
             fs::create_dir_all(&cache_dir)?;
 
             VecDeque::new()
